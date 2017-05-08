@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Create WordPress app with 10up/wp-docker",
   "bin": {
-    "wpt": "bin/create-wp-site"
+    "create-wp-site": "bin/create-wp-site"
   },
   "main": "lib/cli.js",
   "scripts": {
@@ -13,7 +13,6 @@
     "lint": "eslint src test",
     "build": "npm run clean && cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "pre-publish": "npm run clean && npm run lint && npm run test && npm run build",
-    "preversion": "npm run clean && npm run lint && npm test",
     "version": "npm run build && git add -A ."
   },
   "author": "Ivan Kristianto",
@@ -24,8 +23,6 @@
 	"cheerio": "^0.22.0",
 	"commander": "2.9.0",
 	"cross-spawn": "^5.0.1",
-	"diff": "^3.2.0",
-	"escape-string-regexp": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz",
 	"fs-extra": "2.0.0",
 	"glob-all": "^3.1.0",
 	"js-yaml": "^3.7.0",
@@ -33,7 +30,6 @@
 	"open": "0.0.5",
 	"parse-github-repo-url": "^1.3.0",
 	"promzard": "^0.3.0",
-	"randomstring": "^1.1.5",
 	"read": "^1.0.7",
 	"read-chunk": "^2.0.0",
 	"request": "^2.79.0",
