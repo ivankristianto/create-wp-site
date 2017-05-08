@@ -4,6 +4,15 @@
 import exec from './exec';
 import log from './logger';
 
+function clone( url, dir ) {
+	const args = [ 'clone', url, dir ];
+
+	try {
+		exec.git( ...args );
+	} catch ( e ) {
+	}
+}
+
 function tagExists( tagName ) {
 	const args = [ 'rev-parse', tagName ];
 
@@ -82,6 +91,7 @@ function commit( msg ) {
 }
 
 export default {
+	clone,
 	tagExists,
 	tag,
 	getCurrentBranch,
