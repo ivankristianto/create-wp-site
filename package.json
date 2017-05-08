@@ -2,16 +2,61 @@
   "name": "create-wp-site",
   "version": "0.0.1",
   "description": "Create WordPress app with 10up/wp-docker",
-  "main": "app.js",
+  "bin": {
+    "wpt": "bin/create-wp-site"
+  },
+  "main": "lib/cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "build": "pkg -t node6-macos,node6-linux,node6-win --o dist/create-wp-site app.js"
+    "clean": "rimraf lib",
+    "test": "npm run build && cross-env BABEL_ENV=commonjs mocha --compilers js:babel-register --recursive",
+    "cover": "cross-env BABEL_ENV=commonjs istanbul cover _mocha -- --compilers js:babel-register --recursive",
+    "lint": "eslint src test",
+    "build": "npm run clean && cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "pre-publish": "npm run clean && npm run lint && npm run test && npm run build",
+    "preversion": "npm run clean && npm run lint && npm test",
+    "version": "npm run build && git add -A .",
+    "postversion": "git push && git push --tags"
   },
   "author": "Ivan Kristianto",
   "license": "GPL-2.0",
+  "dependencies": {
+	"archiver": "^1.3.0",
+	"chalk": "^1.1.3",
+	"cheerio": "^0.22.0",
+	"commander": "2.9.0",
+	"cross-spawn": "^5.0.1",
+	"diff": "^3.2.0",
+	"escape-string-regexp": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz",
+	"fs-extra": "2.0.0",
+	"glob-all": "^3.1.0",
+	"js-yaml": "^3.7.0",
+	"mkdirp": "^0.5.1",
+	"open": "0.0.5",
+	"parse-github-repo-url": "^1.3.0",
+	"promzard": "^0.3.0",
+	"randomstring": "^1.1.5",
+	"read": "^1.0.7",
+	"read-chunk": "^2.0.0",
+	"request": "^2.79.0",
+	"rimraf": "^2.5.4",
+	"semver": "https://registry.npmjs.org/semver/-/semver-5.3.0.tgz",
+	"shelljs": "^0.7.6",
+	"string-template": "^1.0.0",
+	"temp": "^0.8.3"
+  },
   "devDependencies": {
-    "inquirer": "^3.0.6",
-    "pkg": "^3.0.3"
+	"babel": "^6.5.2",
+	"babel-cli": "^6.14.0",
+	"babel-eslint": "^7.0.0",
+	"babel-plugin-add-module-exports": "^0.2.1",
+	"babel-preset-es2015": "^6.14.0",
+	"babel-preset-stage-2": "^6.13.0",
+	"babel-register": "^6.22.0",
+	"chai": "^3.5.0",
+	"cross-env": "^3.0.0",
+	"eslint": "^3.11.1",
+	"istanbul": "^1.0.0-alpha",
+	"mocha": "^3.2.0",
+	"sinon": "^1.17.7"
   }
 }

@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'Create WordPress Site';
+
+require( '../lib/cli' );
