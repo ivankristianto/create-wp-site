@@ -1,6 +1,5 @@
 {
   "parser": "babel-eslint",
-  "extends": "wpcalypso",
   "env": {
 	"mocha": true,
 	"node": true
@@ -46,6 +45,5 @@
 	  }
 	} ],
 	'valid-jsdoc': [ 1, { requireReturn: false } ],
-	'wpcalypso/import-docblock': 1,
   }
 }

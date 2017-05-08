@@ -20,7 +20,6 @@ export default ( args, config ) => {
 	}
 };
 
-
 function getParams( args, config ) {
 	const dir = args.dir || 'test';
 	return {
