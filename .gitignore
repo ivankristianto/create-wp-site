@@ -3,3 +3,4 @@ release
 vendor
 composer.lock
 .idea
+dist/*

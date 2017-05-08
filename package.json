@@ -2,14 +2,16 @@
   "name": "create-wp-site",
   "version": "0.0.1",
   "description": "Create WordPress app with 10up/wp-docker",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "pkg -t node6-macos,node6-linux,node6-win --o dist/create-wp-site app.js"
   },
   "author": "Ivan Kristianto",
   "license": "GPL-2.0",
   "devDependencies": {
-    "inquirer": "^3.0.6"
+    "inquirer": "^3.0.6",
+    "pkg": "^3.0.3"
   }
 }
