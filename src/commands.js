@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import info from './commands/info';
-import generate from './commands/generate';
+import create from './commands/create';
 
 export default {
 	info: {
@@ -11,10 +11,10 @@ export default {
 			info( args, config );
 		}
 	},
-	generate: {
-		description: 'Generate new WordPress Site',
+	create: {
+		description: 'Create new WordPress Site',
 		action: ( args, config ) => {
-			generate( args, config );
+			create( args, config );
 		}
 	}
 };
