@@ -5,6 +5,8 @@ import info from './commands/info';
 import create from './commands/create';
 
 export default {
+	'--version': {},
+	'-V': {},
 	info: {
 		description: 'Show information about this tool',
 		action: ( args, config ) => {
