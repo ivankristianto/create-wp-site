@@ -12,7 +12,14 @@ import log from './utils/logger';
 
 function main() {
 	try {
-		cli.version( pkg.version );
+		cli.version( pkg.version )
+			.on('--help', function(){
+				console.log('  Examples:');
+				console.log('');
+				console.log('    $ create-wp-site create');
+				console.log('');
+			});
+
 		setupCommands( );
 		runCommand();
 	} catch ( e ) {
@@ -49,7 +56,7 @@ function runCommand() {
 	const passedCmd = process.argv.slice( 2 );
 
 	// No command specified or invalid command.
-	if ( ! passedCmd.length || ! commands[ passedCmd[ 0 ] ] ) {
+	if ( ! passedCmd.length && ! commands[ passedCmd[ 0 ] ] ) {
 		cli.help();
 	}
 
