@@ -38,9 +38,8 @@ function getCreatePrompts() {
 }
 
 function ask(prompts) {
-	return new Promise(resolve => {
-		inquirer.prompt(prompts, resolve);
-	});
+	var prompt = inquirer.createPromptModule();
+	return prompt(prompts);
 }
 
 export default {

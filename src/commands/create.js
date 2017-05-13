@@ -16,8 +16,7 @@ export default (args, config) => {
 
 		var promptOpt = prompts.getCreatePrompts();
 		prompts.ask(promptOpt)
-			.then(handlePrompt)
-			.then(end);
+			.then(handlePrompt);
 
 		/*if( ! params.dir ){
 		 throw new Error( 'We need directory name.' );
@@ -43,12 +42,28 @@ function getParams(args, config) {
 	};
 }
 
-function handlePrompt(result) {
-	console.log(result);
-	return result;
+function handlePrompt(data) {
+	try{
+		is_directory_exist(data.directory);
+
+		log.info( 'Cloning ' + ghURL + ' to ' + data.directory );
+
+		git.clone( ghURL, data.directory );
+	} catch (e) {
+		log.error(e.toString());
+	}
+
+	return data;
 }
 
-function end(data){
-	console.log(data);
-	return data
+function is_directory_exist(dir){
+	if( ! dir ){
+		throw new Error( 'We need directory name.' );
+	}
+
+	if( ! fs.emptyDirSync( dir ) ){
+		throw new Error( 'Directory exist, exit now.' );
+	}
+
+	return true;
 }
