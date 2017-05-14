@@ -111,6 +111,7 @@ function setupDocker( data ) {
 	downloadWp( data );
 	setupWpConfig( data );
 	installWp( data );
+	successInfo( data );
 }
 
 function startDocker( data ) {
@@ -131,4 +132,11 @@ function setupWpConfig( data ) {
 function installWp( data ) {
 	log.info( 'Install WordPress' );
 	log.info( wp.install( data ) );
+}
+
+function successInfo( data ){
+	log.success( 'Congratulations! Your local WordPress site now has been created.' );
+	log.success( 'Url: http://' + data.domain );
+	log.success( 'Username: admin' );
+	log.success( 'Password: password' );
 }
