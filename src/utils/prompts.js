@@ -6,11 +6,23 @@ function getCreatePrompts() {
 			type: 'input',
 			name: 'directory',
 			message: 'Name of new site directory:',
+			validate: function (text) {
+				if (text.length == 0) {
+					return 'You must specify the directory name';
+				}
+				return true;
+			}
 		},
 		{
 			type: 'input',
 			name: 'domain',
 			message: 'Domain to use:',
+			default: function (answers) {
+				return answers.directory+'.dev';
+			},
+			filter: function (val) {
+				return val.toLowerCase();
+			}
 		},
     /*
 		//TODO: Work in Progress
