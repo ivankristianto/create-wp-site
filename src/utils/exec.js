@@ -12,6 +12,18 @@ function git( ...args ) {
 	return _run( 'git', ...args );
 }
 
+function wp( ...args ) {
+	return _run( 'wp', ...args );
+}
+
+function dccompose( ...args ){
+	return _run( 'docker-compose', ...args );
+}
+
+function docker( ...args ){
+	return _run( 'docker', ...args );
+}
+
 function _run( command, ...args ) {
 	if ( which( command ) === null ) {
 		throw new Error( `${ command } is not available` );
@@ -31,5 +43,8 @@ function _run( command, ...args ) {
 
 export default {
 	php,
-	git
+	git,
+	wp,
+	dccompose,
+	docker
 };

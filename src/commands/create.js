@@ -5,9 +5,10 @@
 import git from '../utils/git';
 import prompts from '../utils/prompts';
 import log from '../utils/logger';
+import docker from '../utils/docker';
 import fs from 'fs-extra';
 
-const ghURL = 'https://github.com/10up/wp-docker.git';
+const ghURL = 'https://github.com/10up/wp-local-docker.git';
 
 export default (args, config) => {
 	let params;
@@ -17,18 +18,6 @@ export default (args, config) => {
 		var promptOpt = prompts.getCreatePrompts();
 		prompts.ask(promptOpt)
 			.then(handlePrompt);
-
-		/*if( ! params.dir ){
-		 throw new Error( 'We need directory name.' );
-		 }
-
-		 if( ! fs.emptyDirSync( params.dir ) ){
-		 throw new Error( 'Directory exist, exit now.' );
-		 }
-
-		 log.info( 'Cloning ' + ghURL + ' to ' + params.dir );
-
-		 var message = git.clone( ghURL, params.dir );*/
 
 	} catch (e) {
 		log.error(e.toString());
@@ -44,11 +33,18 @@ function getParams(args, config) {
 
 function handlePrompt(data) {
 	try{
+		log.info('Checking if directory exist');
 		is_directory_exist(data.directory);
 
-		log.info( 'Cloning ' + ghURL + ' to ' + data.directory );
+		log.info('Cloning 10up/wp-local-docker to ' + data.directory);
+		cloneDocker(data);
 
-		git.clone( ghURL, data.directory );
+		log.info('Change directory to ' + data.directory);
+		process.chdir(data.directory);
+
+		log.info('Fire up Docker');
+		docker.start();
+
 	} catch (e) {
 		log.error(e.toString());
 	}
@@ -66,4 +62,10 @@ function is_directory_exist(dir){
 	}
 
 	return true;
+}
+
+function cloneDocker(data){
+	log.info( 'Cloning ' + ghURL + ' to ' + data.directory );
+
+	git.clone( ghURL, data.directory );
 }
