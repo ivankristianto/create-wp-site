@@ -14,10 +14,9 @@ const ghURL = 'https://github.com/10up/wp-local-docker.git';
 export default ( args, config ) => {
 	const params = getParams( args, config );
 	const promptOpt = prompts.getCreatePrompts();
-	prompts.ask( promptOpt )
-			.then( handlePrompt, e =>{
-				log.error( e.toString() );
-			} );
+	prompts.ask( promptOpt ).then( handlePrompt, e => {
+		log.error( e.toString() );
+	} );
 };
 
 function getParams( args, config ) {
@@ -45,7 +44,7 @@ function handlePrompt( data ) {
 		createVhost( data );
 
 		//We need to wait for some process to finish
-		setTimeout( ()=>setupDocker( data ), 5000 );
+		setTimeout( () => setupDocker( data ), 5000 );
 
 		log.info( 'Update our /etc/hosts file' );
 		createHost( data );
@@ -77,26 +76,33 @@ function cloneDocker( data ) {
 function createHost( data ) {
 	const spawn = require( 'child_process' ).spawn;
 	// TODO: cross platform?
-	const command = spawn( 'sudo', [ 'create-wp-site', 'addhost', '--host', data.domain ] );
+	const command = spawn( 'sudo', [
+		'create-wp-site',
+		'addhost',
+		'--host',
+		data.domain,
+	] );
 
-	command.stdout.on( 'data', ( text ) => {
+	command.stdout.on( 'data', text => {
 		console.log( `${text}` );
 	} );
 }
 
 function createVhost( data ) {
 	// TODO: make this a chain of promises / awaitable functions
-	try {
-		const vHost = './config/nginx/' + data.domain + '.conf';
-		const domain = data.domain;
-		fs.createReadStream( './config/nginx/default.conf' ).
-			pipe( fs.createWriteStream( vHost ) );
-		const vhost = fs.readFileSync( vHost, 'utf8' );
-		const result = vhost.replace( /localhost/g, domain );
-		fs.writeFileSync( vHost, result, 'utf8' );
-	} catch ( error ) {
-		console.log( error );
-	}
+	const vHost = './config/nginx/' + data.domain + '.conf';
+	const domain = data.domain;
+	const readStream = fs.createReadStream( './config/nginx/default.conf' );
+	readStream.on( 'open', () => {
+		readStream.pipe( fs.createWriteStream( vHost ) );
+		try {
+			const vhost = fs.readFileSync( vHost, 'utf8' );
+			const result = vhost.replace( /localhost/g, domain );
+			fs.writeFileSync( vHost, result, 'utf8' );
+		} catch ( error ) {
+			console.log( error );
+		}
+	} );
 }
 
 function setupDocker( data ) {
@@ -126,4 +132,3 @@ function installWp( data ) {
 	log.info( 'Install WordPress' );
 	log.info( wp.install( data ) );
 }
-
