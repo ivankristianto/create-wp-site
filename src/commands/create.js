@@ -76,6 +76,7 @@ function cloneDocker( data ) {
 
 function createHost( data ) {
 	const spawn = require( 'child_process' ).spawn;
+	// TODO: cross platform?
 	const command = spawn( 'sudo', [ 'create-wp-site', 'addhost', '--host', data.domain ] );
 
 	command.stdout.on( 'data', ( text ) => {
@@ -84,6 +85,7 @@ function createHost( data ) {
 }
 
 function createVhost( data ) {
+	// TODO: make this a chain of promises / awaitable functions
 	try {
 		const vHost = './config/nginx/' + data.domain + '.conf';
 		const domain = data.domain;
@@ -98,6 +100,7 @@ function createVhost( data ) {
 }
 
 function setupDocker( data ) {
+	// TODO: make this a chain of promises / awaitable functions
 	startDocker( data );
 	downloadWp( data );
 	setupWpConfig( data );
