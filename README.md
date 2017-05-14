@@ -54,9 +54,9 @@ For more help on specific command, supply `-h` or `--help`.
 - [ ] Clone a repository to `wp-content` 
 - [ ] Import SQL File
 - [ ] Option to remove default themes & plugins
-- [ ] Option to add WP_DEBUG and WP_DEBUG_LOG
+- [ ] Option to add `WP_DEBUG` and `WP_DEBUG_LOG`
 - [ ] Option to enable multisite subdirectory / subdomain
-- [ ] Command to Package & Compress everything 
+- [ ] Command to compress everything 
 
 *Note: Pull requests and any feedbacks are always welcome!*
 
@@ -68,6 +68,10 @@ For more help on specific command, supply `-h` or `--help`.
 
 * [wp-local-docker](https://github.com/10up/wp-local-docker)
 * [wp-tools](https://github.com/gedex/wp-tools)
+
+## Thanks to contributors
+
+- [viankakrisna](https://github.com/viankakrisna)
 
 ## License
 
