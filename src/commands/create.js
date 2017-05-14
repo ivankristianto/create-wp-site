@@ -2,11 +2,11 @@
  * Internal dependencies
  */
 
+import fs from 'fs-extra';
 import git from '../utils/git';
 import prompts from '../utils/prompts';
 import log from '../utils/logger';
 import docker from '../utils/docker';
-import fs from 'fs-extra';
 
 const ghURL = 'https://github.com/10up/wp-local-docker.git';
 
@@ -42,8 +42,13 @@ function handlePrompt(data) {
 		log.info('Change directory to ' + data.directory);
 		process.chdir(data.directory);
 
-		log.info('Fire up Docker');
-		docker.start();
+		/*log.info('Fire up Docker');
+		docker.start();*/
+
+		log.info('Create docker-compose.override.yml');
+		docker.createCustomYaml(data);
+
+		createHost(data);
 
 	} catch (e) {
 		log.error(e.toString());
@@ -68,4 +73,14 @@ function cloneDocker(data){
 	log.info( 'Cloning ' + ghURL + ' to ' + data.directory );
 
 	git.clone( ghURL, data.directory );
+}
+
+function createHost(data){
+	const spawn = require('child_process').spawn;
+	const command = spawn('sudo', ['create-wp-site', 'addhost', '--host', data.domain]);
+
+	command.stdout.on('data', (data) => {
+		console.log(`stdout: ${data}`);
+	});
+
 }
