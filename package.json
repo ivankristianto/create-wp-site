@@ -1,6 +1,6 @@
 {
   "name": "create-wp-site",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create WordPress site with 10up/wp-local-docker",
   "bin": {
     "create-wp-site": "bin/create-wp-site"
