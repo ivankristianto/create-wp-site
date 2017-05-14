@@ -9,8 +9,7 @@ function clone( url, dir ) {
 
 	try {
 		exec.git( ...args );
-	} catch ( e ) {
-	}
+	} catch ( e ) {}
 }
 
 function tagExists( tagName ) {
@@ -20,8 +19,7 @@ function tagExists( tagName ) {
 	try {
 		exec.git( ...args );
 		exists = true;
-	} catch ( e ) {
-	}
+	} catch ( e ) {}
 
 	return exists;
 }
@@ -30,7 +28,7 @@ function tag( tagName ) {
 	const args = [ 'tag', tagName ];
 
 	if ( tagExists( tagName ) ) {
-		log.warning( `tag ${ tagName } already exists.` );
+		log.warning( `tag ${tagName} already exists.` );
 	} else {
 		exec.git( ...args );
 	}
@@ -86,7 +84,7 @@ function add() {
 }
 
 function commit( msg ) {
-	const args = [ 'commit', '-m', `${ msg }`, '--quiet' ];
+	const args = [ 'commit', '-m', `${msg}`, '--quiet' ];
 	exec.git( ...args );
 }
 
@@ -101,5 +99,5 @@ export default {
 	stash,
 	unstash,
 	commit,
-	add
+	add,
 };
