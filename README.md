@@ -5,7 +5,7 @@ create-wp-site
 
 `create-wp-site` is a is a site creation wizard for your local WordPress development 
 using [10up/wp-local-docker](https://github.com/10up/wp-local-docker).  
-This tools is inspired by site creation wizard for [VVV](https://github.com/Varying-Vagrant-Vagrants/VVV) by (brad/vv)[https://github.com/bradp/vv].  
+This tools is inspired by site creation wizard for [VVV](https://github.com/Varying-Vagrant-Vagrants/VVV) by [brad/vv](https://github.com/bradp/vv).  
 
 ## Requirements
 
