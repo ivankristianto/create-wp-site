@@ -1,7 +1,7 @@
 {
   "name": "create-wp-site",
-  "version": "0.0.1",
-  "description": "Create WordPress app with 10up/wp-docker",
+  "version": "0.0.2",
+  "description": "Create WordPress site with 10up/wp-local-docker",
   "bin": {
     "create-wp-site": "bin/create-wp-site"
   },
@@ -14,7 +14,7 @@
     "watch": "npm run clean && nodemon --watch src --exec \"npm run build\""
   },
   "author": "Ivan Kristianto",
-  "license": "GPL-2.0",
+  "license": "MIT",
   "dependencies": {
     "archiver": "^1.3.0",
     "chalk": "^1.1.3",
