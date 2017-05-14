@@ -12,7 +12,7 @@ function getCreatePrompts() {
 			name: 'domain',
 			message: 'Domain to use:',
 		},
-		/*
+    /*
 		//TODO: Work in Progress
 		{
 			type: 'input',

@@ -22,6 +22,6 @@ function getParams( args, config ) {
 	const host = args.host || '';
 	return {
 		ip,
-		host
+		host,
 	};
 }

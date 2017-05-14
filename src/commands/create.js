@@ -43,7 +43,7 @@ function handlePrompt( data ) {
 		log.info( 'Create vhost for nginx' );
 		createVhost( data );
 
-		//We need to wait for some process to finish
+    //We need to wait for some process to finish
 		setTimeout( () => setupDocker( data ), 5000 );
 
 		log.info( 'Update our /etc/hosts file' );
@@ -75,7 +75,7 @@ function cloneDocker( data ) {
 
 function createHost( data ) {
 	const spawn = require( 'child_process' ).spawn;
-	// TODO: cross platform?
+  // TODO: cross platform?
 	const command = spawn( 'sudo', [
 		'create-wp-site',
 		'addhost',
@@ -89,7 +89,7 @@ function createHost( data ) {
 }
 
 function createVhost( data ) {
-	// TODO: make this a chain of promises / awaitable functions
+  // TODO: make this a chain of promises / awaitable functions
 	const vHost = './config/nginx/' + data.domain + '.conf';
 	const domain = data.domain;
 	const readStream = fs.createReadStream( './config/nginx/default.conf' );
@@ -106,7 +106,7 @@ function createVhost( data ) {
 }
 
 function setupDocker( data ) {
-	// TODO: make this a chain of promises / awaitable functions
+  // TODO: make this a chain of promises / awaitable functions
 	startDocker( data );
 	downloadWp( data );
 	setupWpConfig( data );

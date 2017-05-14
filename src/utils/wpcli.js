@@ -15,7 +15,14 @@ function coredownload() {
 }
 
 function coreconfig() {
-	const args = [ 'core', 'config', '--dbhost=mysql', '--dbname=wordpress', '--dbuser=root', '--dbpass=password' ];
+	const args = [
+		'core',
+		'config',
+		'--dbhost=mysql',
+		'--dbname=wordpress',
+		'--dbuser=root',
+		'--dbpass=password',
+	];
 
 	try {
 		return exec.wp( ...args );
@@ -33,7 +40,7 @@ function install( data ) {
 		'--admin_user=admin',
 		'--admin_password=password',
 		'--admin_email=admin@' + data.domain,
-		'--skip-email'
+		'--skip-email',
 	];
 
 	try {
@@ -46,5 +53,5 @@ function install( data ) {
 export default {
 	coredownload,
 	coreconfig,
-	install
+	install,
 };

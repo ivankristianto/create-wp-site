@@ -8,7 +8,7 @@ const colorScheme = {
 	info: chalk.white,
 	warning: chalk.yellow,
 	error: chalk.red,
-	debug: chalk.blue
+	debug: chalk.blue,
 };
 
 function success( ...args ) {
@@ -32,7 +32,7 @@ function debug( ...args ) {
 }
 
 function log( scheme, ...args ) {
-	// eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
 	console.log( ...args.map( arg => colorScheme[ scheme ]( arg ) ) );
 }
 
@@ -41,5 +41,5 @@ export default {
 	info,
 	warning,
 	debug,
-	error
+	error,
 };
