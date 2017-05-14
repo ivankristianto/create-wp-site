@@ -49,7 +49,17 @@ $ create-wp-site
 
 For more help on specific command, supply `-h` or `--help`.
 
-## TODOs
+## Compile from source
+
+If you want to contribute or want to compile from the source
+
+```
+$ git clone https://github.com/ivankristianto/create-wp-site.git
+$ cd create-wp-site
+$ npm install && npm run build
+```
+
+## Todo(s)
 
 - [ ] Clone a repository to `wp-content` 
 - [ ] Import SQL File
@@ -60,7 +70,7 @@ For more help on specific command, supply `-h` or `--help`.
 
 *Note: Pull requests and any feedbacks are always welcome!*
 
-## Known Issues
+## Known Issue(s)
 
 - This is not tested on Windows platform yet.
 
