@@ -60,6 +60,10 @@ For more help on specific command, supply `-h` or `--help`.
 
 *Note: Pull requests and any feedbacks are always welcome!*
 
+## Known Issues
+
+- This is not tested on Windows platform yet.
+
 ## Credits
 
 * [wp-local-docker](https://github.com/10up/wp-local-docker)
