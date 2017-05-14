@@ -12,6 +12,8 @@ function getCreatePrompts() {
 			name: 'domain',
 			message: 'Domain to use:',
 		},
+		/*
+		//TODO: Work in Progress
 		{
 			type: 'input',
 			name: 'gitrepo',
@@ -31,7 +33,7 @@ function getCreatePrompts() {
 			type: 'confirm',
 			name: 'enablewpdebug',
 			message: 'Enable WP_DEBUG and WP_DEBUG_LOG (y/N):',
-		},
+		},*/
 	];
 
 	return prompts;

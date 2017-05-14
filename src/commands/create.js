@@ -42,13 +42,14 @@ function handlePrompt(data) {
 		log.info('Change directory to ' + data.directory);
 		process.chdir(data.directory);
 
-		/*log.info('Fire up Docker');
-		docker.start();*/
-
 		log.info('Create docker-compose.override.yml');
 		docker.createCustomYaml(data);
 
+		createVhost(data);
 		createHost(data);
+
+		log.info('Fire up Docker');
+		docker.start();
 
 	} catch (e) {
 		log.error(e.toString());
@@ -83,4 +84,21 @@ function createHost(data){
 		console.log(`stdout: ${data}`);
 	});
 
+}
+
+function createVhost(data) {
+	const vHost = './config/nginx/' + data.domain + '.conf';
+	const domain = data.domain;
+	fs.createReadStream('./config/nginx/default.conf').
+			pipe(fs.createWriteStream(vHost));
+	fs.readFile(vHost, 'utf8', function(err, data) {
+		if (err) {
+			return console.log(err);
+		}
+		var result = data.replace(/localhost/g, domain);
+
+		fs.writeFile(vHost, result, 'utf8', function(err) {
+			if (err) return console.log(err);
+		});
+	});
 }
