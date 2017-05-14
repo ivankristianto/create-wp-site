@@ -4,7 +4,7 @@
 import exec from './exec';
 import log from './logger';
 
-function coredownload(){
+function coredownload() {
 	const args = [ 'core', 'download' ];
 
 	try {
@@ -14,7 +14,7 @@ function coredownload(){
 	}
 }
 
-function coreconfig(){
+function coreconfig() {
 	const args = [ 'core', 'config', '--dbhost=mysql', '--dbname=wordpress', '--dbuser=root', '--dbpass=password' ];
 
 	try {
@@ -24,8 +24,17 @@ function coreconfig(){
 	}
 }
 
-function install(data){
-	const args = [ 'core', 'install', '--url='+data.domain, '--title=Example', '--admin_user=admin', '--admin_password=password', '--admin_email=admin@'+data.domain, '--skip-email' ];
+function install( data ) {
+	const args = [
+		'core',
+		'install',
+		'--url=' + data.domain,
+		'--title=Example',
+		'--admin_user=admin',
+		'--admin_password=password',
+		'--admin_email=admin@' + data.domain,
+		'--skip-email'
+	];
 
 	try {
 		return exec.wp( ...args );
@@ -33,7 +42,6 @@ function install(data){
 		return e.message;
 	}
 }
-
 
 export default {
 	coredownload,

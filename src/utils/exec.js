@@ -14,14 +14,14 @@ function git( ...args ) {
 
 function wp( ...args ) {
 	//tunneling through docker-compose
-	return _run( 'docker-compose', 'exec', '-T','--user', 'www-data', 'phpfpm', 'wp', ...args );
+	return _run( 'docker-compose', 'exec', '-T', '--user', 'www-data', 'phpfpm', 'wp', ...args );
 }
 
-function dccompose( ...args ){
+function dccompose( ...args ) {
 	return _run( 'docker-compose', ...args );
 }
 
-function docker( ...args ){
+function docker( ...args ) {
 	return _run( 'docker', ...args );
 }
 

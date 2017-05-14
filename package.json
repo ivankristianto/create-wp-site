@@ -11,7 +11,8 @@
     "build": "npm run clean && cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "pre-publish": "npm run clean && npm run build",
     "version": "npm run build && git add -A .",
-    "watch": "npm run clean && nodemon --watch src --exec \"npm run build\""
+    "watch": "npm run clean && nodemon --watch src --exec \"npm run build\"",
+    "lint": "eslint --fix --config .eslintrc src"
   },
   "author": "Ivan Kristianto",
   "license": "GPL-2.0",
