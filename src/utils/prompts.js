@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 
 function getCreatePrompts() {
-	var prompts = [
+	const prompts = [
 		{
 			type: 'input',
 			name: 'directory',
@@ -24,7 +24,7 @@ function getCreatePrompts() {
 				return val.toLowerCase();
 			}
 		},
-		/*
+    /*
 		//TODO: Work in Progress
 		{
 			type: 'input',
@@ -51,9 +51,9 @@ function getCreatePrompts() {
 	return prompts;
 }
 
-function ask(prompts) {
-	var prompt = inquirer.createPromptModule();
-	return prompt(prompts);
+function ask( prompts ) {
+	const prompt = inquirer.createPromptModule();
+	return prompt( prompts );
 }
 
 export default {

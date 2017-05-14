@@ -13,12 +13,12 @@ import log from './utils/logger';
 function main() {
 	try {
 		cli.version( pkg.version )
-			.on('--help', function(){
-				console.log('  Examples:');
-				console.log('');
-				console.log('    $ create-wp-site create');
-				console.log('');
-			});
+			.on( '--help', function() {
+				console.log( '  Examples:' );
+				console.log( '' );
+				console.log( '    $ create-wp-site create' );
+				console.log( '' );
+			} );
 
 		setupCommands( );
 		runCommand();
