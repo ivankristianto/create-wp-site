@@ -7,6 +7,7 @@ import git from '../utils/git';
 import prompts from '../utils/prompts';
 import log from '../utils/logger';
 import docker from '../utils/docker';
+import wp from '../utils/wpcli';
 
 const ghURL = 'https://github.com/10up/wp-local-docker.git';
 
@@ -45,11 +46,14 @@ function handlePrompt(data) {
 		log.info('Create docker-compose.override.yml');
 		docker.createCustomYaml(data);
 
+		log.info('Create vhost for nginx');
 		createVhost(data);
-		createHost(data);
 
-		log.info('Fire up Docker');
-		docker.start();
+		//We need to wait for some process to finish
+		setTimeout(()=>setupDocker(data), 5000);
+
+		log.info('Update our /etc/hosts file');
+		createHost(data);
 
 	} catch (e) {
 		log.error(e.toString());
@@ -81,7 +85,7 @@ function createHost(data){
 	const command = spawn('sudo', ['create-wp-site', 'addhost', '--host', data.domain]);
 
 	command.stdout.on('data', (data) => {
-		console.log(`stdout: ${data}`);
+		console.log(`${data}`);
 	});
 
 }
@@ -102,3 +106,32 @@ function createVhost(data) {
 		});
 	});
 }
+
+function setupDocker(data){
+	startDocker(data);
+	downloadWp(data);
+	setupWpConfig(data);
+	installWp(data);
+}
+
+function startDocker(data) {
+	log.info('Fire up Docker');
+	log.info(docker.start());
+}
+
+function downloadWp(data) {
+	log.info('Downloading WordPress');
+	log.info(wp.coredownload());
+
+}
+
+function setupWpConfig(data) {
+	log.info('Setup WordPress Config');
+	log.info(wp.coreconfig());
+}
+
+function installWp(data) {
+	log.info('Install WordPress');
+	log.info(wp.install(data));
+}
+
