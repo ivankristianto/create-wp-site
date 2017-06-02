@@ -58,7 +58,7 @@ function runCommand() {
 
 	// No command specified or invalid command.
 	if ( ! passedCmd.length || ! ( passedCmd in commands ) ) {
-		create({ directory: passedCmd[0] });
+		create( { directory: passedCmd[ 0 ] } );
 	}
 
 	cli.parse( process.argv );

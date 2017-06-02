@@ -13,9 +13,12 @@ const ghURL = 'https://github.com/10up/wp-local-docker.git';
 
 export default ( args, config ) => {
 	const params = getParams( args, config );
-	const promptOpt = prompts.getCreatePrompts(params);
-	const createPromptHandler = (args, config) => function(data){return handlePrompt(data,args, config)};
-	prompts.ask( promptOpt ).then( createPromptHandler(args,config), e => {
+	const promptOpt = prompts.getCreatePrompts( params );
+	const createPromptHandler = ( args, config ) =>
+    function( data ) {
+	return handlePrompt( data, args, config );
+};
+	prompts.ask( promptOpt ).then( createPromptHandler( args, config ), e => {
 		log.error( e.toString() );
 	} );
 };
@@ -138,8 +141,10 @@ function installWp( data ) {
 	log.info( wp.install( data ) );
 }
 
-function successInfo( data ){
-	log.success( 'Congratulations! Your local WordPress site now has been created.' );
+function successInfo( data ) {
+	log.success(
+    'Congratulations! Your local WordPress site now has been created.'
+  );
 	log.success( 'Url: http://' + data.domain );
 	log.success( 'Username: admin' );
 	log.success( 'Password: password' );
