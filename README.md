@@ -44,7 +44,12 @@ $ create-wp-site
   
     Examples:
   
-      $ create-wp-site create
+      $ create-wp-site <directory-name>
+```
+
+### Using Yarn  
+```
+$ yarn create wp-site <directory-name>
 ```
 
 For more help on specific command, supply `-h` or `--help`.

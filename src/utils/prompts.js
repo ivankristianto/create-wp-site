@@ -1,28 +1,40 @@
 import inquirer from 'inquirer';
 
-function getCreatePrompts() {
+function getCreatePrompts( params ) {
 	const prompts = [
 		{
 			type: 'input',
 			name: 'directory',
 			message: 'Name of new site directory:',
-			validate: function (text) {
-				if (text.length == 0) {
+			validate: function( text ) {
+				if ( text.length == 0 ) {
 					return 'You must specify the directory name';
 				}
 				return true;
-			}
+			},
+			'default': function() {
+				if ( '' === params.directory ) {
+					return 'wplocaldocker';
+				}
+				return params.directory + '.dev';
+			},
+			when: function( answers ) {
+				return '' === params.directory;
+			},
 		},
 		{
 			type: 'input',
 			name: 'domain',
 			message: 'Domain to use:',
-			default: function (answers) {
-				return answers.directory+'.dev';
+			'default': function( answers ) {
+				if ( '' === params.directory ) {
+					return answers.directory + '.dev';
+				}
+				return params.directory + '.dev';
 			},
-			filter: function (val) {
+			filter: function( val ) {
 				return val.toLowerCase();
-			}
+			},
 		},
     /*
 		//TODO: Work in Progress
