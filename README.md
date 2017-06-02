@@ -47,7 +47,7 @@ $ create-wp-site
       $ create-wp-site <directory-name>
 ```
 
-### Using Yarn  
+### Using Yarn 1.0
 ```
 $ yarn create wp-site <directory-name>
 ```
