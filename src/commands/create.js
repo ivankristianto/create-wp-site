@@ -13,21 +13,25 @@ const ghURL = 'https://github.com/10up/wp-local-docker.git';
 
 export default ( args, config ) => {
 	const params = getParams( args, config );
-	const promptOpt = prompts.getCreatePrompts();
-	prompts.ask( promptOpt ).then( handlePrompt, e => {
+	const promptOpt = prompts.getCreatePrompts(params);
+	const createPromptHandler = (args, config) => function(data){return handlePrompt(data,args, config)};
+	prompts.ask( promptOpt ).then( createPromptHandler(args,config), e => {
 		log.error( e.toString() );
 	} );
 };
 
 function getParams( args, config ) {
-	const dir = args.dir || '';
+	const directory = args.directory || '';
 	return {
-		dir,
+		directory,
 	};
 }
 
-function handlePrompt( data ) {
+function handlePrompt( data, args, config ) {
 	try {
+		const params = getParams( args, config );
+		data = Object.assign( data, params );
+
 		log.info( 'Checking if directory exist' );
 		is_directory_exist( data.directory );
 
@@ -55,12 +59,12 @@ function handlePrompt( data ) {
 	return data;
 }
 
-function is_directory_exist( dir ) {
-	if ( ! dir ) {
+function is_directory_exist( directory ) {
+	if ( ! directory ) {
 		throw new Error( 'We need directory name.' );
 	}
 
-	if ( ! fs.emptyDirSync( dir ) ) {
+	if ( ! fs.emptyDirSync( directory ) ) {
 		throw new Error( 'Directory exist, exit now.' );
 	}
 

@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 
-function getCreatePrompts() {
+function getCreatePrompts(params) {
+
 	const prompts = [
 		{
 			type: 'input',
@@ -11,6 +12,10 @@ function getCreatePrompts() {
 					return 'You must specify the directory name';
 				}
 				return true;
+			},
+			default: params.directory,
+			when: function (answers) {
+				return ( '' === params.directory );
 			}
 		},
 		{
@@ -18,7 +23,11 @@ function getCreatePrompts() {
 			name: 'domain',
 			message: 'Domain to use:',
 			default: function (answers) {
-				return answers.directory+'.dev';
+				if( '' === params.directory ){
+					return answers.directory+'.dev';
+				}else{
+					return params.directory+'.dev';
+				}
 			},
 			filter: function (val) {
 				return val.toLowerCase();

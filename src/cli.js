@@ -2,6 +2,7 @@
  * External dependencies
  */
 import cli from 'commander';
+import create from './commands/create';
 
 /**
  * Internal dependencies
@@ -16,7 +17,7 @@ function main() {
 			.on( '--help', function() {
 				console.log( '  Examples:' );
 				console.log( '' );
-				console.log( '    $ create-wp-site create' );
+				console.log( '    $ create-wp-site <foldername>' );
 				console.log( '' );
 			} );
 
@@ -56,11 +57,11 @@ function runCommand() {
 	const passedCmd = process.argv.slice( 2 );
 
 	// No command specified or invalid command.
-	if ( ! passedCmd.length && ! commands[ passedCmd[ 0 ] ] ) {
-		cli.help();
+	if ( ! passedCmd.length || ! ( passedCmd[0] in commands ) ) {
+		create({ directory: passedCmd[0] });
 	}
 
-	cli.parse( process.argv );
+	//cli.parse( process.argv );
 }
 
 function longDescFn( k ) {
