@@ -13,7 +13,13 @@ function getCreatePrompts(params) {
 				}
 				return true;
 			},
-			default: params.directory,
+			default: function(){
+				if( '' === params.directory ){
+					return 'wplocaldocker';
+				}else{
+					return params.directory+'.dev';
+				}
+			},
 			when: function (answers) {
 				return ( '' === params.directory );
 			}

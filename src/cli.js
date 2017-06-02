@@ -57,11 +57,11 @@ function runCommand() {
 	const passedCmd = process.argv.slice( 2 );
 
 	// No command specified or invalid command.
-	if ( ! passedCmd.length || ! ( passedCmd[0] in commands ) ) {
+	if ( ! passedCmd.length || ! ( passedCmd in commands ) ) {
 		create({ directory: passedCmd[0] });
 	}
 
-	//cli.parse( process.argv );
+	cli.parse( process.argv );
 }
 
 function longDescFn( k ) {
